@@ -8,7 +8,7 @@ CREATE TABLE filmtype(
 	kirjaldus text);
 select * from filmType
 insert into filmType (filmtype, kirjaldus)
-VALUES ('5D', 'LASTE')
+VALUES ('4D', '')
 
 --tabel piletit
 CREATE TABLE piletiMyyk(
@@ -17,7 +17,7 @@ CREATE TABLE piletiMyyk(
 	kinoKavaId int);
 select * from piletiMyyk
 insert into piletiMyyk (kogus, kinoKavaId)
-VALUES ('50', 1)
+VALUES ('26', 14)
 
 
 
@@ -53,7 +53,7 @@ CREATE TABLE kinokava(
 	piletihind int);
 select * from kinokava
 insert into kinokava (kuupaevKellaaeg, piletihind, filmNimetus)
-VALUES ('2024-04-25','8', 1)
+VALUES ('2024-04-30','9', 4)
 
 
 --tabel film
@@ -69,12 +69,12 @@ CREATE TABLE film(
 --film-->filmType
 ALTER TABLE film add foreign key (filmTypeId) references filmtype(filmTypeId);
 insert into film(filmNimetus, zanrId, pikkus, rezisorId, filmTypeId)
-values ('Shmanni', 1, 200, 1, 3);
+values ('Shmanni', 1, 200, 1, 2);
 --film-->rezisor
 ALTER TABLE film add foreign key (rezisorId) references rezisor(rezisorId);
 --film-->zanr
 ALTER TABLE film add foreign key (zanrId) references zanr(zanrId);
---kinokava-->filmId
+--filmId-->kinokava
 ALTER TABLE kinokava add foreign key (filmNimetus) references film(filmId);
 --piletimyyk-->kinokava
 ALTER TABLE piletiMyyk add foreign key (kinoKavaId) references kinokava(kinoKavaId);
@@ -85,5 +85,3 @@ select * from filmtype
 select * from film
 select * from piletiMyyk
 select * from kinokava
-
-
