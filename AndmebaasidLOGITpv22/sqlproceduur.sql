@@ -57,4 +57,13 @@ insert into film (filmNimetus, kestvus, rezisoor, v_aasta) values ('This Thing W
 insert into film (filmNimetus, kestvus, rezisoor, v_aasta) values ('Story of G.I. Joe', 275, 'Brannon Stonehewer', 1984);
 insert into film (filmNimetus, kestvus, rezisoor, v_aasta) values ('In a World...', 242, 'Patrica Maffetti', 2007);
 insert into film (filmNimetus, kestvus, rezisoor, v_aasta) values ('Hatchet', 267, 'Michaella Primo', 1991);
-
+--filmNimetuse otsing esimese tähe järgi
+create procedure otsing1Taht
+@taht char (1)
+as
+begin
+	select * from film
+	where filmNimetus like CONCAT(@taht,'%');
+end;
+--käivitamine
+exec otsing1Taht 'a'
