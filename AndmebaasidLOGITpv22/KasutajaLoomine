@@ -1,0 +1,22 @@
+create database Hindamine
+create table hindamine(
+Id int primary key identity (1,1),
+nimi varchar(20),
+hind int,
+õppeaine varchar(25));
+select * from hindamine
+
+
+insert into hindamine (id, nimi, hind, õppeaine) values (1, 'Jakov', 4, 'Linux');
+insert into hindamine (id, nimi, hind, õppeaine) values (2, 'Maude', 2, 'Ajalugu');
+insert into hindamine (id, nimi, hind, õppeaine) values (3, 'Alina', 3, 'Eesti keel');
+insert into hindamine (id, nimi, hind, õppeaine) values (4, 'Mihhail', 4, 'Inglise keel');
+insert into hindamine (id, nimi, hind, õppeaine) values (5, 'Viktoria', 5, 'Windows OS');
+insert into hindamine (id, nimi, hind, õppeaine) values (6, 'Nikita', 3, 'Andmebaasid');
+insert into hindamine (id, nimi, hind, õppeaine) values (7, 'Michael', 4, 'Linux');
+insert into hindamine (id, nimi, hind, õppeaine) values (8, 'Artemii', 2, 'Bioloogia');
+insert into hindamine (id, nimi, hind, õppeaine) values (9, 'Pavel', 5, 'keel ja kirjandus');
+insert into hindamine (id, nimi, hind, õppeaine) values (10, 'Georgi', 4, 'Logistika alused');
+select * from hindamine
+
+grant insert, alter, select to Hjuht;
