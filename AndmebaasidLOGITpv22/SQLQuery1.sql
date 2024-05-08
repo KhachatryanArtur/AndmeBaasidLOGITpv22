@@ -217,7 +217,7 @@ select * from Employees
 ---Valime üks kord kõik nimed
 select distinct Name, DepartmentId from Employees
 
----?
+---Võtame kõiki Salary kokku
 select sum(cast(Salary as int)) from Employees
 ---?
 select min(cast(Salary as int)) from Employees
