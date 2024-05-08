@@ -339,7 +339,7 @@ as begin
 	select @FirstName = Name from employees where Id = @Id
 end
 
---?
+--otsime inimese, kellel on ID 6
 declare @FirstName nvarchar(50)
 execute spGetNameById1 6, @FirstName output
 print 'Name of the employee = ' + @FirstName
