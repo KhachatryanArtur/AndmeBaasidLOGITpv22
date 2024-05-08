@@ -214,7 +214,7 @@ values (10, 'Russell', 'Male', 8800, NULL)
 
 select * from Employees
 
----?
+---Valime üks kord kõik nimed
 select distinct Name, DepartmentId from Employees
 
 ---?
