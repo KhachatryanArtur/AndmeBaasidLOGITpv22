@@ -232,7 +232,7 @@ add DepartmentId
 int null
 
 
---?
+--Loome uued verud nimega MiddleName ja LastName
 alter table Employees
 add MiddleName nvarchar(30)
 
