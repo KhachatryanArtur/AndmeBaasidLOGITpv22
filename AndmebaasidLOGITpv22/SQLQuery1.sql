@@ -219,7 +219,7 @@ select distinct Name, DepartmentId from Employees
 
 ---Võtame kõiki Salary kokku
 select sum(cast(Salary as int)) from Employees
----?
+---Valime kõige väikse Salary
 select min(cast(Salary as int)) from Employees
 
 
