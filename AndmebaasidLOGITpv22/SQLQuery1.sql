@@ -347,6 +347,7 @@ print 'Name of the employee = ' + @FirstName
 --protseduur, mis tagastab ID muudatused
 create proc spGetNameById2
 @Id int
+@EmployeeName nvarchar(50) output
 as begin
 	return (select Name from Employees where Id = @Id)
 end
