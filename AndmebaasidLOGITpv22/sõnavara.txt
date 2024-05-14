@@ -7,3 +7,4 @@ kirjed - записи
 väljad - поля
 andmed - данные
 väärtused - значения
+päring - запрос
