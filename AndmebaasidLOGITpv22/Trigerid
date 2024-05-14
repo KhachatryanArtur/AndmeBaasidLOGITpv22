@@ -1,0 +1,78 @@
+create database Khachatryan
+use khachatryan
+Create table auto(
+autoID int PRIMARY KEY identity(1,1),
+Number int,
+varv varchar(20),
+brand varchar(100),
+omanikud int);
+select * from logitabel
+insert into auto(autoID, Number, varv, brand, omanikud)
+values (4, 98754, 'valge', 'Opel', 6)
+drop table logitabel
+delete from auto where autoID=4
+
+
+Create table logitabel(
+id int identity(1,1) PRIMARY KEY,
+aeg DATETIME,
+toiming  varchar(100),
+andmed varchar(200),
+kasutaja varchar(100)
+)
+
+
+select * from logitabel
+drop trigger autoLisamine
+
+CREATE TRIGGER autoLisamine
+ON auto
+FOR INSERT
+AS
+INSERT INTO logitabel(aeg, toiming, andmed, kasutaja)
+SELECT GETDATE(), 'Auto on lisatud', 
+concat('Autonumber: ', inserted.Number, ' ', 'Brand: ', inserted.brand,
+' ', 'Varv: ', inserted.varv, ' ', 'Omanikud :', inserted.omanikud), USER
+FROM inserted
+
+SET IDENTITY_INSERT auto ON
+GRANT SELECT,Insert, UPDATE ON auto TO sekretarKhachatryan
+
+CREATE TRIGGER AutoKustutamine
+ON auto
+FOR DELETE
+AS
+INSERT INTO logitabel(aeg, toiming, andmed, kasutaja)
+SELECT GETDATE(), 'auto on kustutatud', 
+concat ('Autonumber: ', deleted.Number, ' ', 'Brand: ', deleted.brand,
+' ', 'Varv: ', deleted.varv, ' ', 'Omanikud :', deleted.omanikud), USER
+FROM deleted
+
+delete from auto where autoID=4
+select * from logitabel
+
+CREATE TRIGGER AutoUuendamine
+ON auto
+FOR UPDATE
+AS
+INSERT INTO logitabel(aeg, toiming, andmed, kasutaja)
+SELECT GETDATE(), 'Auto on uuendatud', 
+concat('vanad andmed: ', deleted.Number, ' ', 'Brand: ', deleted.brand,
+' ', 'Varv: ', deleted.varv, ' ', 'Omanikud :', deleted.omanikud, ', ',
+ ' uued andmed: ', inserted.number,' ', 'Brand: ', inserted.brand,
+' ', 'Varv: ', inserted.varv, ' ', 'Omanikud :', inserted.omanikud),
+USER
+FROM deleted INNER JOIN inserted
+ON inserted.autoID=deleted.autoID
+
+update auto 
+set number=456456
+where autoID=3;
+select * from auto
+select * from logitabel
+
+insert into auto(autoID, Number, varv, brand, omanikud)
+values (5, 234, 'valge', 'Honda', 4)
+select * from auto
+select * from logitabel
+
