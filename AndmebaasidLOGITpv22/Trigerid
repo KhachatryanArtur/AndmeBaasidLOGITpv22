@@ -8,7 +8,7 @@ brand varchar(100),
 omanikud int);
 select * from logitabel
 insert into auto(autoID, Number, varv, brand, omanikud)
-values (4, 98754, 'valge', 'Opel', 6)
+values (2, 8754, 'roosa', 'Mercedes', 1)
 drop table logitabel
 delete from auto where autoID=4
 
@@ -76,3 +76,53 @@ values (5, 234, 'valge', 'Honda', 4)
 select * from auto
 select * from logitabel
 
+create procedure KustutaAuto	
+@id int
+as
+begin
+select * from auto;
+delete from auto where autoID=@id;
+select * from auto
+end;
+
+exec KustutaAuto 123;
+
+
+create procedure LisaAuto
+@id int,
+@number int,
+@varv varchar(20),
+@brand varchar(20), 
+@omanikud int
+as
+begin
+select * from auto;
+insert into auto(autoID, Number, varv, brand, omanikud)
+values (@id, @number, @varv, @brand, @omanikud)
+select * from auto
+end;
+
+exec LisaAuto 46, 45534,Roheline, Lada, 7
+
+create procedure AutoOtsing
+@omanikud int
+as
+begin
+select * from auto where omanikud like concat(@omanikud, '%')
+end;
+exec autoOtsing 1
+
+create procedure AutoUuend
+@id int,
+@varv varchar(20)
+as
+begin
+select * from auto
+update auto 
+set varv=@varv
+where autoID=@id
+select * from auto
+end;
+exec autouuend 46, hall
+
+SELECT * FROM LOGITABEL
