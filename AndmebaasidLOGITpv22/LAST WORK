@@ -1,0 +1,71 @@
+use Khachatryan
+CREATE TABLE klient(
+	klientId int primary key identity(1,1),
+	eesnimi varchar(50),
+	perenimi varchar(50));
+
+select * from klient
+
+CREATE TABLE ost(
+	ostId int primary key identity(1,1),
+	kliendiId int,
+	tooteId int);
+select * from ost
+
+CREATE TABLE toode(
+	toodeId int primary key identity(1,1),
+	tootenimi varchar(100),
+	uhikuhind numeric,
+	uhik varchar(2));
+
+select * from toode
+ALTER TABLE ost add foreign key (kliendiId) references klient(klientId);
+ALTER TABLE ost add foreign key (tooteId) references toode(toodeId);
+
+insert into toode( tootenimi, uhikuhind, uhik)
+values ('Vaniili puding', 3.6, 2);
+ select * from klient
+ select * from ost
+ select * from toode
+ insert into ost(kliendiId, tooteId)
+ values (1, 2)
+ select * from klient
+ select * from toode
+ GRANT SELECT, INSERT, UPDATE ON klient TO opilaneKhachatryan;
+
+
+
+ Create table logi(
+id int identity(1,1) PRIMARY KEY,
+aeg DATETIME,
+andmed varchar(200),
+kasutaja varchar(100)
+)
+
+CREATE TRIGGER Lisamine
+ON ost
+FOR INSERT
+AS
+INSERT INTO logi(aeg, andmed, kasutaja)
+SELECT GETDATE(), 
+concat('Osti info','Klienti ID: ', inserted.kliendiId, ' ','Toote ID: ', inserted.tooteId), USER
+FROM inserted
+select * from logi
+
+CREATE TRIGGER LisamineKlienti
+ON klient
+FOR INSERT
+AS
+INSERT INTO logi(aeg, andmed, kasutaja)
+SELECT GETDATE(), 
+concat('klienti info','Eesnimi: ', inserted.eesnimi, ' ','Klienti perenimi: ', inserted.perenimi), USER
+FROM inserted
+
+CREATE TRIGGER LisamineToode
+ON toode
+FOR INSERT
+AS
+INSERT INTO logi(aeg, andmed, kasutaja)
+SELECT GETDATE(), 
+concat('Toode info','Toode nimi: ', inserted.tootenimi, ' ','Toode ühikhind: ', inserted.uhikuhind, ' ','Toode ühik ', inserted.uhik), USER
+FROM inserted
